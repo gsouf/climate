@@ -1,0 +1,16 @@
+## Application Route
+---
+
+default:
+  controller: error
+  action: default
+
+  children:
+
+    search:
+      options:
+        n:
+          type: int
+          default: 10
+      controller: search
+      action: search

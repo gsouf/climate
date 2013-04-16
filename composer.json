@@ -1,0 +1,16 @@
+{
+    "require": {
+        
+        "php": ">=5.4",
+        "symfony/yaml": "v2.2.1",
+        "peek/peek": "dev-master"
+
+    },
+    "autoload": {
+        "psr-0" : {
+            "Controllers"   :   "application/",
+            "App"           :   "application/",
+            "Climat"        :   "lib/"
+        }
+    }
+}
