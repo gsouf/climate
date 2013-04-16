@@ -32,7 +32,7 @@
 
 
 /**
- * Define Begin of Script for Stats
+ * Define Begin time of Script for Stats
  */
 define("START_SCRIPT", microtime());
 
@@ -69,6 +69,7 @@ Climat\Config::build($configArray);
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Handler\NativeMailerHandler;
 
 // =============
 // Error Log
@@ -79,7 +80,7 @@ $logE->pushHandler(new StreamHandler(Climat\Config::errorLog()));
 
 //Email
 if("yes" === Climat\Config::sendEmailOnError() && Climat\Config::sendEmailOnErrorTo()) // if config said to send a mail when an error happens
-    $logE->pushHandler(new Monolog\Handler\NativeMailerHandler(Climat\Config::sendEmailOnErrorTo(),"Climat got an error during execution","Climat App"));
+    $logE->pushHandler(new NativeMailerHandler(Climat\Config::sendEmailOnErrorTo(),"Climat got an error during execution","Climat App"));
 //Add to the available logs
 Climat\Log::add('error', $logE);
 
@@ -97,6 +98,8 @@ Climat\Log::add('access', $logA);
  *   Set Handlers for Errors    =
  *                              =
  ********************************/
+
+// Exceptions 
 set_exception_handler(function(Exception $e){
     Climat\Log::error("Uncaught exception has stopped the script with the message '"
             .$e->getMessage()."' in the file "
@@ -105,7 +108,27 @@ set_exception_handler(function(Exception $e){
     
 });
 
-throw new Exception("blabla");
+//Errors
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+    
+    $critical=  \Climat\Log::errnoIsCritical($errno);
+    
+    Climat\Log::error(\Climat\Log::errnoToString($errno)." Error ".($critical?"has stopped the script":"happened")." with the message '"
+            .$errstr."' in the file "
+            .$errfile.":"
+            .$errline
+        );
+    
+    if($critical)
+        ;
+    else
+        return true;
+});
+
+
+
+
+
 /*===============================
  *                              =
  * Get and Parse the yaml route =

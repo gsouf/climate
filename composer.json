@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-0" : {
-            "Controllers"   :   "application/",
+            "Controller"   :   "application/",
             "App"           :   "application/",
             "Climat"        :   "lib/"
         }

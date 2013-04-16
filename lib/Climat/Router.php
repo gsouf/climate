@@ -18,6 +18,14 @@ class Router{
         $this->routes=$routes;
     }
     
+    /**
+     * 
+     * @param type $args
+     * @return type
+     * @throws RouteConfigException
+     * @throws Exception\BadOptionException
+     * @throws NoRouteFoundException
+     */
     public function route($args){
 
         if(!isset($this->routes["default"])){
@@ -78,7 +86,7 @@ class Router{
                 // COMMAND CASE
                 
                 if(!isset($route['children'][$current]))
-                    throw new NoRouteFoundException("param $current is not a valid param");
+                    throw new NoRouteFoundException("$current is not a valid Operation");
                 
                 $route=$route['children'][$current];
                 $routeName=$current;

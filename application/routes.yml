@@ -2,8 +2,8 @@
 ---
 
 default:
-  controller: error
-  action: default
+  controller: Climat
+  action: climat
 
   children:
 
