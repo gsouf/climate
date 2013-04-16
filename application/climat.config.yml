@@ -1,0 +1,34 @@
+## YAML Template.
+---
+
+
+# run log file
+# Every time a script ends and log will be written here
+# Can be relative (root of the application) or absolute (root or the system) path
+# --
+# It is adviced to set the logs into the logs of the system. E.g for linux it will be /var/log/myappname/access.log
+accessLog: log/access.log
+
+
+
+# error log file
+# Every time an error or an exception stops the script, the ouput is loggued here
+# Can be relative (root of the application) or absolute (root or the system) path
+# --
+# It is adviced to set the logs into the logs of the system. E.g for linux it will be /var/log/myappname/error.log
+errorLog: log/error.log
+
+# Send email on error 
+# yes|no
+# mail client must bust configured
+sendEmailOnError: yes
+
+# Send email to
+sendEmailOnErrorTo: sghzal@gmail.com
+
+# Path of the route file
+# It is a yaml file
+# Can be relative path (root of the application) or absolute path (root of the system) 
+routesFile: application/routes.yml
+
+

@@ -3,6 +3,8 @@
         
         "php": ">=5.4",
         "symfony/yaml": "v2.2.1",
+        "monolog/monolog": "1.4.1",
+        
         "peek/peek": "dev-master"
 
     },

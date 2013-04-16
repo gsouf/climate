@@ -1,0 +1,2 @@
+[2013-04-16 20:30:01] error.DEBUG: Uncaught exception has stopped the script with the message blabla in the file /home/bobito/NetBeansProjects/climat/climat.php:102 [] []
+[2013-04-16 20:31:33] error.DEBUG: Uncaught exception has stopped the script with the message 'blabla' in the file /home/bobito/NetBeansProjects/climat/climat.php:102 [] []
