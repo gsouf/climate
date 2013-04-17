@@ -1,6 +1,11 @@
 ## YAML Template.
 ---
 
+# Name of the application
+applicationName: Climate
+# Version of the application
+applicationVersion: 0.1
+
 
 # run log file
 # Every time a script ends and log will be written here
@@ -31,4 +36,8 @@ sendEmailOnErrorTo: sghzal@gmail.com
 # Can be relative path (root of the application) or absolute path (root of the system) 
 routesFile: application/routes.yml
 
-
+# set to yes to go oon debugRoutes mode.
+# debugRoutes mode allow to type a command and see how it is routed without launching the application
+# Note that while debugRoutes mode is enabled the application wont launch anything, just give an output of the routing
+# Possible values : yes|no
+debugRoutes: no

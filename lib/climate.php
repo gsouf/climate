@@ -52,11 +52,14 @@ chdir(dirname("."));
 require_once "vendor/autoload.php";
 
 
+
+
 /*===============================
  *                              =
  *     Prepares the Configs     =
  *                              =
  ********************************/
+
 $configsFile = "application/climate.config.yml";
 $configArray = (new Symfony\Component\Yaml\Parser())->parse(file_get_contents($configsFile));
 

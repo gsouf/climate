@@ -1,37 +1,27 @@
 <?php
 
-/**
- * @license See LICENSE
- */
-
 namespace Climate;
+
 /**
- * Description of Config
+ * Description of ApplicationConfig
  *
- * @author Soufiane GHZAL
+ * @author bobito
  */
-abstract class Config {
+abstract class Config{
     
-    private static $neededConfigs=["accessLog","errorLog","routesFile","sendEmailOnError"];
-    private static $config=[];
-
-
-    public static function build($configArray){
-
-        foreach(self::$neededConfigs as $conf){
-            if(!isset($configArray[$conf]))
-                throw new \Exception ("Config $conf is missing");
-        }
-        
-        self::$config=$configArray;
+    private static $conf;
+    
+    public static function build($confArray) {
+        $c=new Utils\Config(["accessLog","errorLog","routesFile","sendEmailOnError","applicationName","applicationVersion","debugRoutes"]);
+        self::$conf=$c;
+        $c->build($confArray);
     }
     
     public static function __callStatic($name,$arg) {
         
-        if(!isset(self::$config[$name]))
-            return null;
+        $c=self::$conf;
         
-        return self::$config[$name];
+        return $c->$name;
         
     }
     

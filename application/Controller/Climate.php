@@ -36,7 +36,7 @@ class Climate {
                                    =====
                                 ============
                                 
-               CLIMATE DEFAULT CONTROLLER WORKS LIKE A CHARM.
+               CLIMATE DEFAULT CONTROLLER WORKS LIKE A CHARM :)
                
        YOU CAN SEE THE DOC AT : https://github.com/SneakyBobito/climate
     

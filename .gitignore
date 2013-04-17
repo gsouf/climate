@@ -1,3 +1,6 @@
+# climate
+/log/*
+
 #netbeans
 /nbproject/
 /build/
