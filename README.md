@@ -1,8 +1,9 @@
-
 ----------
 
 climate
 ==========
+Framework for php CLI applications
+
 ----------
 
 
