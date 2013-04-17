@@ -2,8 +2,8 @@
 ---
 
 default:
-  controller: Climat
-  action: climat
+  controller: Climate
+  action: climate
 
   children:
 

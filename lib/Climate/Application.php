@@ -1,13 +1,17 @@
 <?php
 
-namespace App;
+/**
+ * @license See LICENSE
+ */
+
+namespace Climate;
 
 use Symfony\Component\Yaml\Parser as yamlParser;
 
 /**
  * Application starter class.
  *
- * @author bobito
+ * @author Soufiane GHZAL
  */
 class Application {
     
@@ -15,13 +19,13 @@ class Application {
     
     /**
      * the routeur
-     * @var \Climat\Router
+     * @var \Climate\Router
      */
     protected static $routeur;
     
     
 
-    public static function start($args, \Climat\Router $router){
+    public static function start($args, \Climate\Router $router){
         
         self::$args=$args; // remove the first one which is the name of the script
         self::$routeur=$router;
@@ -39,13 +43,13 @@ class Application {
                     $c=new $className();
                     $c->$action();
                 }else{
-                    throw new \Climat\Exception\RouteConfigException("Method $action doesnt exists in $className");
+                    throw new \Climate\Exception\RouteConfigException("Method $action doesnt exists in $className");
                 }
             }else{
-                throw new \Climat\Exception\RouteConfigException("Class $className doesnt exists.");
+                throw new \Climate\Exception\RouteConfigException("Class $className doesnt exists.");
             }
             
-        }  catch (\Climat\Exception\RouteConfigException $e){
+        }  catch (\Climate\Exception\RouteConfigException $e){
             
             echo "An error has happened with the route configuration :".PHP_EOL;
             echo $e->getMessage().PHP_EOL;
@@ -66,7 +70,7 @@ class Application {
     
     public static function stop(){
         
-        \Climat\Log::access("Script Ended after ".(microtime()-START_SCRIPT)." seconds");  // TODO pretify the log writte
+        \Climate\Log::access("Script Ended after ".(microtime()-START_SCRIPT)." seconds");  // TODO pretify the log writte
     }
     
     public static function stopOnError($message){

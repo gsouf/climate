@@ -1,10 +1,14 @@
 <?php
 
-namespace Climat;
+/**
+ * @license See LICENSE
+ */
 
-use Climat\Exception\RouteConfigException;
+namespace Climate;
 
-use Climat\Exception\NoRouteFoundException;
+use Climate\Exception\RouteConfigException;
+
+use Climate\Exception\NoRouteFoundException;
 
 class Router{
     

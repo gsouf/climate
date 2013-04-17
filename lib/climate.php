@@ -1,4 +1,9 @@
 <?php 
+
+/**
+ * @license See LICENSE
+ */
+
 /*
                                 _
                                (  )
@@ -52,10 +57,10 @@ require_once "vendor/autoload.php";
  *     Prepares the Configs     =
  *                              =
  ********************************/
-$configsFile = "application/climat.config.yml";
+$configsFile = "application/climate.config.yml";
 $configArray = (new Symfony\Component\Yaml\Parser())->parse(file_get_contents($configsFile));
 
-Climat\Config::build($configArray);
+Climate\Config::build($configArray);
 
 
 
@@ -76,20 +81,20 @@ use Monolog\Handler\NativeMailerHandler;
 $logE = new Logger('error');
 
 //Log file
-$logE->pushHandler(new StreamHandler(Climat\Config::errorLog()));
+$logE->pushHandler(new StreamHandler(Climate\Config::errorLog()));
 
 //Email
-if("yes" === Climat\Config::sendEmailOnError() && Climat\Config::sendEmailOnErrorTo()) // if config said to send a mail when an error happens
-    $logE->pushHandler(new NativeMailerHandler(Climat\Config::sendEmailOnErrorTo(),"Climat got an error during execution","Climat App"));
+if("yes" === Climate\Config::sendEmailOnError() && Climate\Config::sendEmailOnErrorTo()) // if config said to send a mail when an error happens
+    $logE->pushHandler(new NativeMailerHandler(Climate\Config::sendEmailOnErrorTo(),"Climate got an error during execution","Climate App"));
 //Add to the available logs
-Climat\Log::add('error', $logE);
+Climate\Log::add('error', $logE);
 
 
 // =============
 // Access Log
 $logA = new Logger('access');
-$logA->pushHandler(new StreamHandler(Climat\Config::accessLog()));
-Climat\Log::add('access', $logA);
+$logA->pushHandler(new StreamHandler(Climate\Config::accessLog()));
+Climate\Log::add('access', $logA);
 
 
 
@@ -101,7 +106,7 @@ Climat\Log::add('access', $logA);
 
 // Exceptions 
 set_exception_handler(function(Exception $e){
-    Climat\Log::error("Uncaught exception has stopped the script with the message '"
+    Climate\Log::error("Uncaught exception has stopped the script with the message '"
             .$e->getMessage()."' in the file "
             .$e->getFile().":"
             .$e->getLine());
@@ -111,9 +116,9 @@ set_exception_handler(function(Exception $e){
 //Errors
 set_error_handler(function($errno, $errstr, $errfile, $errline){
     
-    $critical=  \Climat\Log::errnoIsCritical($errno);
+    $critical=  \Climate\Log::errnoIsCritical($errno);
     
-    Climat\Log::error(\Climat\Log::errnoToString($errno)." Error ".($critical?"has stopped the script":"happened")." with the message '"
+    Climate\Log::error(\Climate\Log::errnoToString($errno)." Error ".($critical?"has stopped the script":"happened")." with the message '"
             .$errstr."' in the file "
             .$errfile.":"
             .$errline
@@ -134,11 +139,11 @@ set_error_handler(function($errno, $errstr, $errfile, $errline){
  * Get and Parse the yaml route =
  *                              =
  ********************************/
-$routeFile=Climat\Config::routesFile();
+$routeFile=Climate\Config::routesFile();
 
 $routeArray=(new Symfony\Component\Yaml\Parser())->parse(file_get_contents($routeFile));
 
-$router=new \Climat\Router($routeArray);
+$router=new \Climate\Router($routeArray);
 
 
 /*==============================
@@ -147,4 +152,4 @@ $router=new \Climat\Router($routeArray);
  *                             =
  *******************************/
 
-App\Application::start(array_slice($argv,1),$router);
+Climate\Application::start(array_slice($argv,1),$router);

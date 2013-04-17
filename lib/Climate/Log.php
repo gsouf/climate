@@ -1,6 +1,10 @@
 <?php
 
-namespace Climat;
+/**
+ * @license See LICENSE
+ */
+
+namespace Climate;
 
 use Monolog\Logger;
 
@@ -8,7 +12,7 @@ use Monolog\Logger;
 /**
  * Description of Logger
  *
- * @author bobito
+ * @author Soufiane GHZAL
  */
 class Log {
     

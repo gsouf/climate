@@ -1,6 +1,9 @@
 <?php
+/**
+ * @license See LICENSE
+ */
 
-namespace Climat\Exception;
+namespace Climate\Exception;
 
 /**
  * Description of NoRouteFoundException

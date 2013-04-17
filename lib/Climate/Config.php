@@ -1,10 +1,14 @@
 <?php
 
-namespace Climat;
+/**
+ * @license See LICENSE
+ */
+
+namespace Climate;
 /**
  * Description of Config
  *
- * @author bobito
+ * @author Soufiane GHZAL
  */
 abstract class Config {
     

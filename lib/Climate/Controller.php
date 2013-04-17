@@ -1,11 +1,15 @@
 <?php
 
-namespace Climat;
+/**
+ * @license See LICENSE
+ */
+
+namespace Climate;
 
 /**
  * Description of Controller
  *
- * @author bobito
+ * @author Soufiane GHZAL
  */
 class Controller {
     
