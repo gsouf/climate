@@ -1,8 +1,6 @@
-----------
-
-climate
+CLIMATE
 ==========
-Framework for php CLI applications
+FRAMEWORK FOR PHP CLI APPLICATIONS
 
 ----------
 
@@ -15,6 +13,9 @@ Here is a quick guide for creating your new app.
 Please feel free to communicate about issues or suggestions. It is everytime appreciated !
 
 -----------------
+
+QUICK START
+======
 
 Install Climate
 -----
