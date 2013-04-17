@@ -103,7 +103,13 @@ class Application {
         self::stop();
     }
     
-    
+    /**
+     * get how long the application is running
+     * @return float  length of time that the script is running
+     */
+    public static function getTime(){
+        return microtime()-START_TIME;
+    }
     
     public static function stop($output=null,$logMessage="."){
         

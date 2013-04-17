@@ -55,7 +55,7 @@ class Climate extends \Climate\Controller{
     public function word(){
         
         if($this->n<=0){
-            throw new Exception("n must be positive");
+            throw new \Exception("n must be positive");
         }
         
         for($i=0;$i<$this->n;$i++){
