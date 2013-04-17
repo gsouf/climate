@@ -21,4 +21,4 @@
  */
 
 
-include 'lib/climate.php';
+include 'lib/bootstrap.php';

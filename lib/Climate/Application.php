@@ -55,53 +55,29 @@ class Application {
             $className  = "\\Controller\\".$params['controller'];
             $action     = $params['action'];
             
+            
+            /**=======================
+             *      DEBUG MODE       =
+             * stops the application =
+             *************************/
             if("yes" === Config::debugRoutes()){
-                echo PHP_EOL;            
-                echo "    ========================================";
-                echo PHP_EOL;            
-                echo PHP_EOL;            
-                echo "       RUNNING APPLICATION AS DEBUG MODE";
-                echo PHP_EOL;            
-                echo PHP_EOL;            
-                echo "    ========================================";
-                echo PHP_EOL;            
-                echo PHP_EOL;            
-                echo " debugRoutes mode said that routing was successful : ";
-                echo PHP_EOL;
-                echo PHP_EOL;
-                echo "  - controller           :  ".$className;
-                echo PHP_EOL;
-                echo "  - action               :  ".$action;
-                echo PHP_EOL;
-                echo PHP_EOL;
-                if(count($params['params'])>0){
-                    echo "  - params     :  ";
-                    foreach($params['params'] as $k=>$v){
-                        echo "      - $k : $v";
-                        echo PHP_EOL;
-                    }
-                }
-                if(class_exists($className)){
-                    echo "  - controller is valid  :  YES";
-                    echo PHP_EOL;
-                    echo "  - action is valid      :  ".(method_exists($className, $action)?"YES":"NO");
-                    
-                    
-                }else{
-                    echo "  - controller is valid  :  NO";
-                }
-                echo PHP_EOL;
-                echo PHP_EOL;
-                self::stop();
-                
+                self::debugMode($params);
             }
+
+            
+            
             
             if(class_exists($className)){
-                if(method_exists($className, $action)){
-                    $c=new $className();
-                    $c->$action();
+                $c=new $className();
+                if(is_a($c, "\Climate\Controller")){
+                    if(method_exists($className, $action)){
+                            // EXECUTE $c->$action(); after the try catch. 
+                            // Then if an error happens, the error will be handled by the error/Exception Handler
+                    }else{
+                        throw new \Climate\Exception\RouteConfigException("Method $action doesnt exists in $className");
+                    }
                 }else{
-                    throw new \Climate\Exception\RouteConfigException("Method $action doesnt exists in $className");
+                    throw new \Climate\Exception\RouteConfigException("Class $className doesnt extend \Climate\Controller");
                 }
             }else{
                 throw new \Climate\Exception\RouteConfigException("Class $className doesnt exists.");
@@ -115,33 +91,36 @@ class Application {
             
         } catch (\Exception $e){
             
-            echo "Command not valid :".PHP_EOL;
+            echo "Command invalid :".PHP_EOL;
             echo $e->getMessage().PHP_EOL;
             self::stop();
             
         }
         
-        
+        $c->setParams($params['params']);
+        $c->$action();
         
         self::stop();
     }
     
     
     
-    public static function stop($output=null,$logMessage=""){
+    public static function stop($output=null,$logMessage="."){
         
-        \Climate\Log::access("Script Ended after ".(microtime()-START_SCRIPT)." seconds".(strlen($logMessage)>0?" with message : ".$logMessage:"."));  // TODO pretify the log writte
-    
+        \Climate\Log::access("Script Ended after ".(microtime()-START_SCRIPT)." seconds".$logMessage);  // TODO pretify the log writte
+        
+        echo PHP_EOL;
+        
         exit();
     }
     
     
     
-    public static function stopOnError($message){
+    public static function stopOnError($message=""){
         
         print "Script was interrupted by an error. Consult the logs for furthers informations";
         
-        self::stop();
+        self::stop(null," with an error.");
     }
     
     
@@ -180,6 +159,85 @@ class Application {
      */
     public static function ClimateConf($confName){
         return self::$ClimateConfig->$confName;
+    }
+    
+    
+    public static function debugMode($params){
+        
+        $className  = "\\Controller\\".$params['controller'];
+        $action     = $params['action'];
+
+
+        /**=====================
+         *     DEBUG MODE      =
+         * stops after routing =
+         ***********************/
+        if("yes" === Config::debugRoutes()){
+
+            $col=new \Colors\Color;
+
+            $c=new \Colors\Color();
+
+            echo PHP_EOL;            
+            echo "    ========================================";
+            echo PHP_EOL;            
+            echo PHP_EOL;            
+            echo "       RUNNING APPLICATION IN DEBUG MODE";
+            echo PHP_EOL;            
+            echo PHP_EOL;            
+            echo "    ========================================";
+            echo PHP_EOL;            
+            echo PHP_EOL;            
+            echo " debugRoutes mode said that routing was successful : ";
+            echo PHP_EOL;
+            echo PHP_EOL;
+            echo "  - controller           :  ".$className;
+            echo PHP_EOL;
+            echo "  - action               :  ".$action;
+            echo PHP_EOL;
+            echo PHP_EOL;
+            if(count($params['params'])>0){
+                echo "  - params     :  ".PHP_EOL;
+                foreach($params['params'] as $k=>$v){
+                    echo "      - $k :    $v";
+                    echo PHP_EOL;
+                }
+                echo PHP_EOL;
+            }
+            if(class_exists($className)){
+                echo "  - controller exists    :  YES";
+                echo PHP_EOL;
+
+                $c=new $className();
+                if(is_a($c, "\Climate\Controller")){
+                    echo "  - controller is valid  :  YES";
+                    echo PHP_EOL;
+                }else{
+                    echo "  - controller is valid  :  ".$col(" NO - It doesn't extend \Climate\Controller ")->white->bold->bg_red;
+                    echo PHP_EOL;
+                }
+
+
+                echo "  - action is valid      : ".(method_exists($className, $action)?" YES":$c(" NO ")->white->bold->bg_red);
+                echo PHP_EOL;
+
+            }else{
+                echo "  - controller is valid  :  ".$col(" NO ")->white->bold->bg_red;
+                echo PHP_EOL;
+            }
+
+            echo PHP_EOL;
+
+            // we are in debug route mode, then stop the application
+
+            self::stop(null,"- DebugRoutes mode -");
+
+        }
+        /**=====================
+         *   END DEBUG MODE    =
+         ***********************/
+        
+        
     }
     
     

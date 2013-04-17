@@ -65,15 +65,19 @@ class Router{
                         
                         // option maybe needs a to match a type. Look if so
                         if(isset($route['options'][$optionName]['type'])){
-                            switch($route['options'][$optionName]['type']){
+                            switch(strtolower($route['options'][$optionName]['type'])){
                                 case "int":
 
                                     if(!\Peek\Utils\ValuesUtils::isInt($optionValue))
                                         throw new Exception\BadOptionException("option $current needs an integer as value, ".var_export($optionValue,true)." given");
                                     break;
+                                    
+                                case "string":
+                                    // EVERYTIME A STRING
+                                    break;
                                 
                                 default:
-                                throw new RouteConfigException("type '".$route['options'][$optionName]['type']."' was configured of option $current, but this type is not a valid type. Valid types are : int, string, bool ");
+                                    throw new RouteConfigException("type '".$route['options'][$optionName]['type']."' was configured of option $current, but this type is not a valid type. Valid types are : int, string, bool ");
                             
                             }
                         }
@@ -104,7 +108,7 @@ class Router{
         if(isset($route["options"])){
             foreach ($route["options"] as $name=>$opt){
                 if( ! isset($opt['default']))
-                    throw new Exception\BadOptionException("No value found for the option $name if no default value is set you need to specify when it is call");
+                    throw new Exception\BadOptionException("Option -$name was omited, -$name is needed");
 
                 $params[$name]=$opt['default'];
 

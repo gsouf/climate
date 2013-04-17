@@ -4,13 +4,21 @@
 default:
   controller: Climate
   action: climate
-
+  man: Climate Application Manual Page
+  
   children:
 
-    search:
+    word:
       options:
         n:
           type: int
-          default: 10
-      controller: search
-      action: search
+          default: 1
+          man: number of time the word has to be written
+          
+        w:
+          type: string
+          man: the word to write
+          
+      controller: Climate
+      action: word
+      man: Write a word

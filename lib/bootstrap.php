@@ -114,6 +114,27 @@ set_exception_handler(function(Exception $e){
             .$e->getFile().":"
             .$e->getLine());
     
+    Climate\Application::stopOnError();
+    
+});
+
+register_shutdown_function(function(){
+    
+    # Getting last error
+    $error = error_get_last();
+    
+    if(in_array($error['type'], [ E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING ])){
+        
+        Climate\Log::error(\Climate\Log::errnoToString($error['type'])." - Error has stopped the script with the message '"
+            .$error['message']."' in the file "
+            .$error['file'].":"
+            .$error['line']
+        );
+        
+        echo "Script has ended after a critical Error, see logs for furthers informations.".PHP_EOL;
+    }
+
+    
 });
 
 //Errors
@@ -121,14 +142,14 @@ set_error_handler(function($errno, $errstr, $errfile, $errline){
     
     $critical=  \Climate\Log::errnoIsCritical($errno);
     
-    Climate\Log::error(\Climate\Log::errnoToString($errno)." Error ".($critical?"has stopped the script":"happened")." with the message '"
+    Climate\Log::error(\Climate\Log::errnoToString($errno)." - Error ".($critical?"has stopped the script":"happened")." with the message '"
             .$errstr."' in the file "
             .$errfile.":"
             .$errline
         );
     
     if($critical)
-        ;
+        Climate\Application::stopOnError();
     else
         return true;
 });

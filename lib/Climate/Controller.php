@@ -13,8 +13,20 @@ namespace Climate;
  */
 class Controller {
     
+    private $params;
     
+    public function setParams($params){
+        $this->params=$params;
+    }
+    
+    public function __get($name) {
+        
+        
+        if(isset($this->params[$name])){
+            return $this->params[$name];
+        }
+        
+        throw new \Exception("Trying to get unexisting option : $name");
+    }
     
 }
-
-?>

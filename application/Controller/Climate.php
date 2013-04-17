@@ -7,7 +7,7 @@ namespace Controller;
  *
  * @author bobito
  */
-class Climate {
+class Climate extends \Climate\Controller{
 
     public function climate(){
         echo "
@@ -48,6 +48,20 @@ class Climate {
                                                     
     
         
+        
+        
+    }
+    
+    public function word(){
+        
+        if($this->n<=0){
+            throw new Exception("n must be positive");
+        }
+        
+        for($i=0;$i<$this->n;$i++){
+            echo $this->w;
+            echo PHP_EOL;
+        }
         
         
     }
