@@ -43,7 +43,7 @@ php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
 php composer.phar install
 ```
 
-If you never used Composer look at [Composer website][http://getcomposer.org/download/] for furthers informations
+If you never used Composer look at [Composer website][2] for furthers informations
 
 
 Config Climate
@@ -166,3 +166,4 @@ Short roadmap of climate development :
 
 
 [1]: https://github.com/SneakyBobito/climate/archive/v0.1.0-alpha.zip
+[2]: http://getcomposer.org/download/
