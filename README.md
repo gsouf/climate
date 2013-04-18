@@ -22,6 +22,9 @@ Requirement
 
 Climate needs **php5.4** to be installed.
 
+Knowledges of **php5.3 OOP**
+
+Knowledges of **YAML**
 
 Install Climate
 -----
@@ -30,7 +33,7 @@ First of all grab the [latest stable release][1]   and unarchive it anywhere you
 
 
 
-Now use composer to load dependencies. If you never used Composer see here : http://getcomposer.org/download/
+Now use composer to load dependencies.
 
 At the root the downloaded dir : 
 
@@ -38,8 +41,9 @@ At the root the downloaded dir :
 php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));" 
 
 php composer.phar install
-
 ```
+
+If you never used Composer look at [Composer website][http://getcomposer.org/download/] for furthers informations
 
 
 Config Climate
@@ -76,29 +80,89 @@ Now let's see how to configure you routes. That's to say the params and options 
 Config Routes
 -----------------
 
+Defaultly the routes are defined in application/routes.yml
 
-TODO
+A correct route file will have the following form :
+
+```yaml
+---
+
+default:
+  controller: Climate
+  action: climate
+  man: Climate Application Manual Page
+  
+  children:
+
+    word:
+      controller: Climate
+      action: word
+      man: Write a word
+      
+      options:
+        n:
+          type: int
+          default: 1
+          man: number of time the word has to be written
+          
+        w:
+          type: string
+          default: climate
+          man: the word to write
+          
+
+```
+
+The ```default``` key **MUST** be the root of the file and will be present only once. 
+Actually it defines the default route when you just type.  
+
+You can see the ``` controller ``` key. Controller defines which controller to call when the route will match.
+Controller are in ``` application/Controller ```. They must have the ``` Controller ``` namespace and must extend  ``` \Climate\Controller ```.
 
 
+The key ``` action ``` is the method of the controller to call.
+
+E.g when you type ``` php climate.php ``` you will enter the 'default' key which routes you to the class ```\Controller\Climate``` in the method ```climate```.
+
+
+
+Now let's see the key ``` children ```. As it suggests it allows to defines children routes. 
+
+Here is a child route named "word". You can reach it by typing ``` php climate.php word ``` which will method ``` word ``` of object ``` \Controller\Climate ```
+
+There is now a key ``` option ```. Here you can see options ```n``` and ```w```. Try to type ``` php climate.php word -w awesome -n 2 ```. This willl write "awesome" twice
+Each option has a type ``` int - string - one|word|amougn|list - activated ``` (note that list of string is still not activated)
+
+Default route can have more than one child and each child can have zero, one or more children. [TODO : Example]
+
+``` man ``` keyword will allow to define information for auto generated manual page
 
 First Controller
+-------------  
+
+TODO
+
+  
+
+Tools  
 -------------
 
 TODO
 
 
 
-Tools
+Roadmap
 -------------
 
-TODO
+Short roadmap of climate development :
+
+ - [ ] Improve Router Config and Script
+ - [ ] 'List of string' option type
+ - [ ] Man generator
+ - [ ] Ouputer Object for controller return
 
 
 
-Other Tools
--------------
-
-TODO
 
 
 [1]: https://github.com/SneakyBobito/climate/archive/v0.1.0-alpha.zip
