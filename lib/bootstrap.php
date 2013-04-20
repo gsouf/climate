@@ -39,7 +39,7 @@
 /**
  * Define Begin time of Script for Stats
  */
-define("START_SCRIPT", microtime());
+define("START_SCRIPT", microtime(true));
 
 /**
  * Set Basepath to Root of Application. It makes includes easier .

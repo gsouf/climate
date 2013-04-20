@@ -111,7 +111,7 @@ class Application {
     
     public static function stop($output=null,$logMessage="."){
         
-        \Climate\Log::access("Script Ended after ".(microtime()-START_SCRIPT)." seconds".$logMessage);  // TODO pretify the log writte
+        \Climate\Log::access("Script Ended after ".(microtime(true)-START_SCRIPT)." seconds".$logMessage);  // TODO pretify the log writte
         
         echo PHP_EOL;
         
