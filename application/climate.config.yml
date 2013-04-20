@@ -1,4 +1,7 @@
-## YAML Template.
+## This config file mixes Climate configs and your personnal configs.
+##
+## You can add a config then get it in the code. 
+## e.g if you create the config named "enableWord" you can get it from the code on this way : Climate\Config::enableWord()
 ---
 
 # Name of the application
@@ -7,14 +10,30 @@ applicationName: Climate
 applicationVersion: 0.1
 
 
+
+#####################################
+#  PLACE FOR YOR PERSONNAL CONFIGS  #
+#####################################
+
+
+
+
+
+
+
+
+
+#####################
+#  CLIMATE CONFIGS  #
+#####################
+
+
 # run log file
 # Every time a script ends and log will be written here
 # Can be relative (root of the application) or absolute (root or the system) path
 # --
 # It is adviced to set the logs into the logs of the system. E.g for linux it will be /var/log/myappname/access.log
 accessLog: log/access.log
-
-
 
 # error log file
 # Every time an error or an exception stops the script, the ouput is loggued here

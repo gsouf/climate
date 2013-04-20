@@ -76,6 +76,16 @@ class Router{
                                     // EVERYTIME A STRING
                                     break;
                                 
+                                case "natural": // positive int
+                                    if(!\Peek\Utils\ValuesUtils::isInt($optionValue) && $optionValue<0)
+                                        throw new Exception\BadOptionException("option $current needs to be a [positive integer or 0], ".var_export($optionValue,true)." given");
+                                    break;
+                                    
+                                case "nz-natural": // gt zero int
+                                    if(!\Peek\Utils\ValuesUtils::isInt($optionValue) || $optionValue<1)
+                                        throw new Exception\BadOptionException("option $current needs to be a [greater than 0 integer], ".var_export($optionValue,true)." given");
+                                    break;
+                                    
                                 default:
                                     throw new RouteConfigException("type '".$route['options'][$optionName]['type']."' was configured of option $current, but this type is not a valid type. Valid types are : int, string, bool ");
                             
