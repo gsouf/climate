@@ -176,4 +176,8 @@ $router=new \Climate\Router($routeArray);
  *                             =
  *******************************/
 
-Climate\Application::start(array_slice($argv,1),$router);
+Climate\Application::init(array_slice($argv,1),$router);
+
+require 'application/onStartup.php';
+
+Climate\Application::start();

@@ -40,14 +40,18 @@ class Application {
     protected static $config;
     
     
-
-
-    public static function start($args, \Climate\Router $router){
+    
+    protected static $services;
+    
+    public static function init($args, \Climate\Router $router){
         
-        self::$args=$args; // remove the first one which is the name of the script
+        self::$args=$args;
         self::$routeur=$router;
+        self::$services=new Service();
         
-        
+    }
+
+    public static function start(){
         
         try{
             $params=self::$routeur->route(self::$args);
@@ -103,13 +107,7 @@ class Application {
         self::stop();
     }
     
-    /**
-     * get how long the application is running
-     * @return float  length of time that the script is running
-     */
-    public static function getTime(){
-        return microtime()-START_TIME;
-    }
+    
     
     public static function stop($output=null,$logMessage="."){
         
@@ -167,7 +165,29 @@ class Application {
         return self::$ClimateConfig->$confName;
     }
     
+    /**
+     * get the asked service
+     * @param string $name the asked service
+     * @return mixed the service
+     * @throws \Climate\Exception service doesnt exist
+     */
+    public static function service($name){
+        $s=self::$services;
+        
+        try{
+            return $s->getService($name);
+        } catch (Exception $e){
+            throw $e;
+        }
+    }
     
+    public static function registerService($name, callable $callable){
+        
+        $s=self::$services;
+        $s->registerService($name,$callable);
+        
+    }
+
     public static function debugMode($params){
         
         $className  = "\\Controller\\".$params['controller'];
