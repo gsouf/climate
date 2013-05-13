@@ -13,7 +13,8 @@
         "psr-0" : {
             "Controller"    :   "application/",
             "App"           :   "application/",
-            "Climate"       :   "lib/"
+            "Climate"       :   "lib/",
+            "Printemps"     :   "lib/"
         }
     }
 }
