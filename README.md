@@ -55,7 +55,7 @@ Go to the  ``` application ``` folder and open ``` climate.config.yml ```
 Edit  ``` applicationName ``` and ``` applicationVersion: ``` with your application informations.
 
 
-Edit  ``` accessLog ``` and ``` accessLog ``` with the paths where you want to put the logs.
+Edit  ``` accessLog ``` and ``` errorLog ``` with the paths where you want to put the logs.
 
 DONT FORGET TO CREATE THE DIRECTORY THAT YOU SPECIFIED IN LOG CONFIGS. 
 e.g If you leave the defaults values create the log dir at the root of the climate dir (not in the application dir).
