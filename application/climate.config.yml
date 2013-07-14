@@ -48,7 +48,7 @@ errorLog: log/error.log
 sendEmailOnError: yes
 
 # Send email to
-sendEmailOnErrorTo: sghzal@gmail.com
+sendEmailOnErrorTo: me@mydomaine.tld
 
 # Path of the route file
 # It is a yaml file
