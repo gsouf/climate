@@ -1,8 +1,23 @@
-CLIMATE
-==========
-FRAMEWORK FOR PHP CLI APPLICATIONS
+This project is discontinued
+============================
 
-----------
+This project is discontinued and has been replaced 
+with [cli-starter](https://github.com/SneakyBobito/php-cli-starter) 
+that is instead delivered as a library for handling cli applications and
+thus it is much more flexible.
+
+It allows to be implemented easyly in any existing project.
+
+See more at : https://github.com/SneakyBobito/php-cli-starter
+
+
+--------------------------
+
+
+CLIMATE
+-------
+
+FRAMEWORK FOR PHP CLI APPLICATIONS
 
 
 Climate intends to make easyest as possible the creation of CLI application using php.
@@ -12,10 +27,7 @@ Here is a quick guide for creating your new app.
 
 Please feel free to communicate about issues or suggestions. It is everytime appreciated !
 
------------------
 
-QUICK START
-======
 
 Requirement
 -----
